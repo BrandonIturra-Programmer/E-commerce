@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito - MiEcommerce</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <%- include('partials/navbar') %>
+
+  <main class="container">
+
+    <a href="/home" class="volver">← Volver</a>
+    <h1 class="carrito-titulo">Productos en tu Carrito</h1>
+
+    <div class="carrito-lista">
+      <% carrito.forEach(item => { %>
+        <div class="carrito-item">
+          <img src="/img/<%= item.imagen %>" alt="<%= item.nombre %>"/>
+          <p class="carrito-item__nombre"><%= item.nombre %></p>
+
+          <div class="carrito-item__acciones">
+            <button class="btn-quitar">Quitar</button>
+            <div class="carrito-item__cantidad">
+              <button>-</button>
+              <span><%= item.cantidad %></span>
+              <button>+</button>
+            </div>
+            <p class="carrito-item__precio"><%= (item.precio * item.cantidad).toLocaleString() %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <div class="carrito-total">
+      <p>Total de Puntos <span><%= total.toLocaleString() %></span></p>
+      <button class="btn-pagar">Ir a Pagar</button>
+    </div>
+
+  </main>
+
+  <%- include('partials/footer') %>
+
+</body>
+</html>

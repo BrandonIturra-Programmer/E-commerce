@@ -1,0 +1,53 @@
+<nav class="navbar">
+  <div class="navbar__logo">
+    <a href="/home"><span class="logo-mi">Mi</span>Ecommerce</a>
+  </div>
+
+  <div class="navbar__search">
+    <input type="text" placeholder="Buscar productos..." />
+    <button class="search-btn">🔍</button>
+  </div>
+
+  <div class="navbar__actions">
+    <a href="/carrito" class="cart-btn">
+      🛒 <span class="cart-badge">2</span>
+    </a>
+    <div class="user-menu" onclick="toggleMenu()">
+      <span>Olivia</span>
+
+      <!-- Dropdown -->
+      <div class="dropdown" id="dropdown">
+        <div class="dropdown__header">
+          <div class="dropdown__avatar">🐶</div>
+          <span>Olivia</span>
+        </div>
+        <a href="/home" class="dropdown__item">Inicio</a>
+        <a href="#" class="dropdown__item">Mis Compras</a>
+        <a href="#" class="dropdown__item">Favoritos</a>
+        <a href="#" class="dropdown__item">Historial</a>
+        <div class="dropdown__item dropdown__tema" onclick="toggleTema()">
+          ⚙️ Cambiar a Tema Claro
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function toggleMenu() {
+    const dropdown = document.getElementById('dropdown');
+    dropdown.classList.toggle('active');
+  }
+
+  function toggleTema() {
+    document.body.classList.toggle('tema-claro');
+  }
+
+  // Cerrar dropdown al hacer click afuera
+  document.addEventListener('click', (e) => {
+    const userMenu = document.querySelector('.user-menu');
+    if (!userMenu.contains(e.target)) {
+      document.getElementById('dropdown').classList.remove('active');
+    }
+  });
+</script>

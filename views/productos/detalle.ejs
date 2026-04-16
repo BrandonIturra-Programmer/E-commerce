@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title><%= producto.nombre %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <%- include('../partials/navbar') %>
+
+  <main class="container">
+
+    <div class="breadcrumb">
+      <a href="/productos">← Volver al listado</a>
+      <span> › <%= producto.categoria %></span>
+    </div>
+
+    <div class="detalle">
+      <div class="detalle__imagen">
+        <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
+      </div>
+
+      <div class="detalle__info">
+        <h1><%= producto.nombre %></h1>
+        <p class="detalle__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+        <button class="btn-agregar">Agregar al Carrito</button>
+        <p class="detalle__descripcion"><%= producto.descripcion %></p>
+      </div>
+    </div>
+
+    <div class="relacionados">
+      <h2>También te puede interesar</h2>
+      <div class="productos-grid">
+        <% productos.forEach(p => { %>
+          <% if(p.id !== producto.id) { %>
+            <div class="producto-card">
+              <img src="/img/<%= p.imagen %>" alt="<%= p.nombre %>"/>
+              <div class="producto-card__info">
+                <p class="producto-card__nombre"><%= p.nombre %></p>
+                <p class="producto-card__precio"><%= p.precio %> <span>PUNTOS</span></p>
+              </div>
+            </div>
+          <% } %>
+        <% }) %>
+      </div>
+    </div>
+
+  </main>
+
+  <%- include('../partials/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>MiEcommerce</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <%- include('../partials/navbar') %>
+
+  <main class="container">
+    <h1>Te puede interesar</h1>
+
+    <div class="productos-grid">
+      <% productos.forEach(producto => { %>
+        <div class="producto-card">
+          <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
+          <div class="producto-card__info">
+            <p class="producto-card__nombre"><%= producto.nombre %></p>
+            <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+</body>
+</html>
