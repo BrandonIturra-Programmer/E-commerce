@@ -612,3 +612,38 @@ a {
 .tema-claro .categorias {
   background-color: #555;
 }
+
+/* ===== ERROR PAGES ===== */
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.error-code {
+  font-size: 120px;
+  font-weight: bold;
+  color: #00A896;
+  line-height: 1;
+}
+
+.error-mensaje {
+  font-size: 20px;
+  color: #555;
+  margin: 16px 0 32px 0;
+}
+
+.btn-error {
+  background-color: #3D3D3D;
+  color: white;
+  padding: 12px 32px;
+  border-radius: 25px;
+  font-size: 15px;
+}
+
+.btn-error:hover {
+  background-color: #555;
+}

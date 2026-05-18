@@ -28,6 +28,11 @@ app.get('/', (req, res) => {
   res.redirect('/auth/login');
 });
 
+// Middleware 404
+app.use((req, res) => {
+  res.status(404).render('404');
+});
+
 // Servidor
 app.listen(3000, () => {
   console.log('Servidor corriendo en http://localhost:3000');
