@@ -4,22 +4,23 @@ const app = express();
 
 // Motor de vistas
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 
 // Archivos estáticos
 app.use(express.static('public'));
 
+// Body 
+app.use(express.urlencoded({ extended: true }));
+
 // Rutas
-const productosRouter = require('./routes/productos');
+const productosRouter = require('./src/routes/productos');
+const authRouter = require('./src/routes/auth');
+const homeRouter = require('./src/routes/home');
+const carritoRouter = require('./src/routes/carrito');
+
 app.use('/productos', productosRouter);
-
-const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
-
-const homeRouter = require('./routes/home');
 app.use('/home', homeRouter);
-
-const carritoRouter = require('./routes/carrito');
 app.use('/carrito', carritoRouter);
 
 // Ruta principal

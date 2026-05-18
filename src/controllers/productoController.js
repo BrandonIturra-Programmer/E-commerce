@@ -12,7 +12,7 @@ const verDetalle = (req, res) => {
     return res.status(404).send('Producto no encontrado');
   }
 
-  res.render('productos/detalle', { producto, productos }); // 👈 agregamos productos
+  res.render('productos/detalle', { producto, productos });
 };
 
 module.exports = { listarProductos, verDetalle };

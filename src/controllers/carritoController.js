@@ -1,5 +1,3 @@
-const productos = require('../models/producto');
-
 let carrito = [
   {
     id: 1,
@@ -22,4 +20,4 @@ const mostrarCarrito = (req, res) => {
   res.render('carrito', { carrito, total });
 };
 
-module.exports = { mostrarCarrito }; 
+module.exports = { mostrarCarrito };
