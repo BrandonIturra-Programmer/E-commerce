@@ -1,23 +1,33 @@
-let carrito = [
-  {
-    id: 1,
-    nombre: 'Jack Daniel\'s Tennessee Honey 750ml',
-    precio: 19900,
-    cantidad: 1,
-    imagen: 'whiskey.jpg'
-  },
-  {
-    id: 2,
-    nombre: '1 Combo Hamburguesa',
-    precio: 5000,
-    cantidad: 1,
-    imagen: 'hamburguesa.jpg'
-  }
-];
+const cartService = require('../services/cartService');
 
 const mostrarCarrito = (req, res) => {
-  const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  const carrito = cartService.getCarrito(req);
+  const total = cartService.getTotal(req);
   res.render('carrito', { carrito, total });
 };
 
-module.exports = { mostrarCarrito };
+const agregarProducto = (req, res) => {
+  const producto = {
+    id: parseInt(req.body.id),
+    nombre: req.body.nombre,
+    precio: parseInt(req.body.precio),
+    imagen: req.body.imagen
+  };
+  cartService.agregarProducto(req, producto);
+  res.redirect('/carrito');
+};
+
+const quitarProducto = (req, res) => {
+  const id = parseInt(req.params.id);
+  cartService.quitarProducto(req, id);
+  res.redirect('/carrito');
+};
+
+const actualizarCantidad = (req, res) => {
+  const id = parseInt(req.params.id);
+  const cantidad = parseInt(req.body.cantidad);
+  cartService.actualizarCantidad(req, id, cantidad);
+  res.redirect('/carrito');
+};
+
+module.exports = { mostrarCarrito, agregarProducto, quitarProducto, actualizarCantidad };

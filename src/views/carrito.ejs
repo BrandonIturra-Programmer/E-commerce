@@ -14,29 +14,47 @@
     <a href="/home" class="volver">← Volver</a>
     <h1 class="carrito-titulo">Productos en tu Carrito</h1>
 
-    <div class="carrito-lista">
-      <% carrito.forEach(item => { %>
-        <div class="carrito-item">
-          <img src="/img/<%= item.imagen %>" alt="<%= item.nombre %>"/>
-          <p class="carrito-item__nombre"><%= item.nombre %></p>
+    <% if(carrito.length === 0) { %>
+      <div class="carrito-vacio">
+        <p>Tu carrito está vacío</p>
+        <a href="/home" class="btn-error">Ver productos</a>
+      </div>
+    <% } else { %>
 
-          <div class="carrito-item__acciones">
-            <button class="btn-quitar">Quitar</button>
-            <div class="carrito-item__cantidad">
-              <button>-</button>
-              <span><%= item.cantidad %></span>
-              <button>+</button>
+      <div class="carrito-lista">
+        <% carrito.forEach(item => { %>
+          <div class="carrito-item">
+            <img src="/img/<%= item.imagen %>" alt="<%= item.nombre %>"/>
+            <p class="carrito-item__nombre"><%= item.nombre %></p>
+
+            <div class="carrito-item__acciones">
+
+              <!-- Botón quitar -->
+              <form action="/carrito/quitar/<%= item.id %>" method="POST">
+                <button type="submit" class="btn-quitar">Quitar</button>
+              </form>
+
+              <!-- Actualizar cantidad -->
+              <form action="/carrito/actualizar/<%= item.id %>" method="POST">
+                <div class="carrito-item__cantidad">
+                  <button type="submit" name="cantidad" value="<%= item.cantidad - 1 %>">-</button>
+                  <span><%= item.cantidad %></span>
+                  <button type="submit" name="cantidad" value="<%= item.cantidad + 1 %>">+</button>
+                </div>
+              </form>
+
+              <p class="carrito-item__precio"><%= (item.precio * item.cantidad).toLocaleString() %></p>
             </div>
-            <p class="carrito-item__precio"><%= (item.precio * item.cantidad).toLocaleString() %></p>
           </div>
-        </div>
-      <% }) %>
-    </div>
+        <% }) %>
+      </div>
 
-    <div class="carrito-total">
-      <p>Total de Puntos <span><%= total.toLocaleString() %></span></p>
-      <button class="btn-pagar">Ir a Pagar</button>
-    </div>
+      <div class="carrito-total">
+        <p>Total de Puntos <span><%= total.toLocaleString() %></span></p>
+        <button class="btn-pagar">Ir a Pagar</button>
+      </div>
+
+    <% } %>
 
   </main>
 

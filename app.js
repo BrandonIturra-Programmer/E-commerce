@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
 const app = express();
 
 // Motor de vistas
@@ -9,8 +10,15 @@ app.set('views', path.join(__dirname, 'src/views'));
 // Archivos estáticos
 app.use(express.static('public'));
 
-// Body 
+// Body parser
 app.use(express.urlencoded({ extended: true }));
+
+// Sesiones
+app.use(session({
+  secret: 'miecommerce_secret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Rutas
 const productosRouter = require('./src/routes/productos');
