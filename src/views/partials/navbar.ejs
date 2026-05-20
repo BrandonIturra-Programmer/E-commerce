@@ -10,16 +10,19 @@
 
   <div class="navbar__actions">
     <a href="/carrito" class="cart-btn">
-      🛒 <span class="cart-badge">2</span>
+      🛒 
+      <% if(cantidadCarrito > 0) { %>
+        <span class="cart-badge"><%= cantidadCarrito %></span>
+      <% } %>
     </a>
     <div class="user-menu" onclick="toggleMenu()">
-      <span>Olivia</span>
+      <span>Brandon</span>
 
       <!-- Dropdown -->
       <div class="dropdown" id="dropdown">
         <div class="dropdown__header">
           <div class="dropdown__avatar">🐶</div>
-          <span>Olivia</span>
+          <span>Brandon</span>
         </div>
         <a href="/home" class="dropdown__item">Inicio</a>
         <a href="#" class="dropdown__item">Mis Compras</a>

@@ -23,6 +23,14 @@ app.use(session({
   saveUninitialized: true
 }));
 
+const cartService = require('./src/services/cartService');
+
+app.use((req, res, next) => {
+  const carrito = cartService.getCarrito(req);
+  res.locals.cantidadCarrito = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  next();
+});
+
 // Rutas
 const productosRouter = require('./src/routes/productos');
 const authRouter = require('./src/routes/auth');
