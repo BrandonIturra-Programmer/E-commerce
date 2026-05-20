@@ -6,5 +6,8 @@ router.get('/', mostrarCarrito);
 router.post('/agregar', agregarProducto);
 router.post('/quitar/:id', quitarProducto);
 router.post('/actualizar/:id', actualizarCantidad);
+router.get('/checkout', (req, res) => {
+  res.render('checkout');
+});
 
 module.exports = router;
