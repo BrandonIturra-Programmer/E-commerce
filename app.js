@@ -36,6 +36,12 @@ app.get('/', (req, res) => {
   res.redirect('/auth/login');
 });
 
+//Middleware 500
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).render('500');
+});
+
 // Middleware 404
 app.use((req, res) => {
   res.status(404).render('404');
