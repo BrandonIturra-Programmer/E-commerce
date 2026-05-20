@@ -1,32 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>MiEcommerce</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
 
-  <%- include('../partials/navbar') %>
+<% titulo = 'Productos - MiEcommerce' %>
 
-  <main class="container">
-    <h2 class="seccion-titulo">Te puede interesar</h2>
-    <div class="productos-grid">
-      <% productos.forEach(producto => { %>
-        <a href="/productos/<%= producto.id %>">
-          <div class="producto-card">
-            <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
-            <div class="producto-card__info">
-              <p class="producto-card__nombre"><%= producto.nombre %></p>
-              <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
-            </div>
-          </div>
-        </a>
-      <% }) %>
-    </div>
-  </main>
-
-  <%- include('../partials/footer') %>
-
-</body>
-</html>
+<h2 class="seccion-titulo">Te puede interesar</h2>
+<div class="productos-grid">
+  <% productos.forEach(producto => { %>
+    <a href="/productos/<%= producto.id %>">
+      <div class="producto-card">
+        <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
+        <div class="producto-card__info">
+          <p class="producto-card__nombre"><%= producto.nombre %></p>
+          <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+        </div>
+      </div>
+    </a>
+  <% }) %>
+</div>

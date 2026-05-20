@@ -1,11 +1,14 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 
 // Motor de vistas
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
+app.set('layout', 'partials/layout');
+app.use(expressLayouts);
 
 // Archivos estáticos
 app.use(express.static('public'));
