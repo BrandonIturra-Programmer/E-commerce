@@ -1,8 +1,9 @@
 const productosService = require('../services/productsService');
 
 const mostrarHome = (req, res) => {
-  const productos = productosService.getAll();
-  res.render('home', { productos });
+  const destacados = productosService.getDestacados();
+  const masPedidos = productosService.getMasPedidos();
+  res.render('home', { destacados, masPedidos });
 };
 
 module.exports = { mostrarHome };

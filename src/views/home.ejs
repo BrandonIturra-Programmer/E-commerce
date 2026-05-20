@@ -1,4 +1,3 @@
-
 <% titulo = 'MiEcommerce - Inicio' %>
 
 <div class="categorias">
@@ -29,9 +28,10 @@
   </div>
 </div>
 
+<!-- US6 - Productos sugeridos -->
 <h2 class="seccion-titulo">Te puede interesar</h2>
 <div class="productos-grid">
-  <% productos.forEach(producto => { %>
+  <% destacados.forEach(producto => { %>
     <a href="/productos/<%= producto.id %>">
       <div class="producto-card">
         <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
@@ -44,9 +44,10 @@
   <% }) %>
 </div>
 
+<!-- US7 - Más pedidos -->
 <h2 class="seccion-titulo">Los más pedidos</h2>
 <div class="productos-grid">
-  <% productos.forEach(producto => { %>
+  <% masPedidos.forEach(producto => { %>
     <a href="/productos/<%= producto.id %>">
       <div class="producto-card">
         <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
