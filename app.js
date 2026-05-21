@@ -11,7 +11,7 @@ app.set('layout', 'partials/layout');
 app.use(expressLayouts);
 
 // Archivos estáticos
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Body parser
 app.use(express.urlencoded({ extended: true }));

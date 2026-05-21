@@ -15,6 +15,8 @@
     <% } %>
 
     <form action="/auth/registro" method="POST">
+      <input type="text" name="nombre" placeholder="Tu nombre" class="auth-input"/>
+      <input type="text" name="apellido" placeholder="Tu apellido" class="auth-input"/>
       <input type="email" name="email" placeholder="Tu email" class="auth-input"/>
       <input type="password" name="password" placeholder="Tu nueva contraseña" class="auth-input"/>
       <input type="password" name="repetirPassword" placeholder="Repite tu contraseña" class="auth-input"/>

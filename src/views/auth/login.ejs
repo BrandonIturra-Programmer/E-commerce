@@ -5,9 +5,11 @@
   <div class="auth-banner"></div>
   <div class="auth-card">
     <h1>¡Hola!</h1>
-    <input type="text" placeholder="Tu nombre de usuario" class="auth-input"/>
-    <input type="password" placeholder="Tu contraseña" class="auth-input"/>
-    <button class="auth-btn">Iniciar Sesión</button>
+  <form action="/auth/login" method="POST">
+  <input type="text" name="usuario" placeholder="Tu nombre de usuario" class="auth-input"/>
+  <input type="password" name="password" placeholder="Tu contraseña" class="auth-input"/>
+  <button class="auth-btn">Iniciar Sesión</button>
+</form>
     <p class="auth-link">
       ¿No tienes cuenta? <a href="/auth/registro">Regístrate</a>
     </p>

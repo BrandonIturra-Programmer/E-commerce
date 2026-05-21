@@ -8,21 +8,27 @@
     <button class="search-btn">🔍</button>
   </div>
 
-  <div class="navbar__actions">
-    <a href="/carrito" class="cart-btn">
-      🛒 
-      <% if(cantidadCarrito > 0) { %>
-        <span class="cart-badge"><%= cantidadCarrito %></span>
-      <% } %>
-    </a>
+ <div class="navbar__actions">
+  <% if (typeof ocultarNav === 'undefined' || !ocultarNav) { %>
+   <a href="/carrito" class="navbar__icon-btn cart-btn">
+  🛒 
+  <% if(cantidadCarrito > 0) { %>
+    <span class="cart-badge"><%= cantidadCarrito %></span>
+  <% } %>
+</a>
+        <div class="navbar__icon-btn">
     <div class="user-menu" onclick="toggleMenu()">
-      <span>Brandon</span>
+      <img src="/img/olivia.jpg" alt="Olivia" class="navbar__avatar"/>
+    <span>Olivia</span>
+    </div>
 
-      <!-- Dropdown -->
       <div class="dropdown" id="dropdown">
         <div class="dropdown__header">
-          <div class="dropdown__avatar">🐶</div>
-          <span>Brandon</span>
+          <div class="dropdown__avatar">
+  <img src="/img/olivia.jpg" alt="Olivia"  class="dropdown__avatar-img"/>
+
+</div>
+          <span>Olivia</span>
         </div>
         <a href="/home" class="dropdown__item">Inicio</a>
         <a href="#" class="dropdown__item">Mis Compras</a>
@@ -32,7 +38,9 @@
           ⚙️ Cambiar a Tema Claro
         </div>
       </div>
+  </div>
     </div>
+  <% } %>
   </div>
 </nav>
 

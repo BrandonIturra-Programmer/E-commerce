@@ -55,18 +55,33 @@ a {
   width: 100%;
   font-size: 14px;
 }
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
+
+.navbar__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.navbar__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F0F0F0;
+  border-radius: 25px;
+  padding: 6px 12px;
+  gap: 8px;
+}
 .search-btn {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 16px;
-}
-
-.navbar__actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
 }
 
 .cart-btn {
@@ -374,23 +389,13 @@ a {
   margin-bottom: 32px;
 }
 
+
 .banner-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background-color: rgba(0,0,0,0.2);
-  border-radius: 8px;
-  padding: 16px;
-}
-
-.banner-card img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-}
-
-.banner-info {
-  color: white;
+  border-radius: 10px;
+  min-height: 180px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
 
 .banner-descuento {
@@ -556,7 +561,17 @@ a {
   z-index: 200;
   overflow: hidden;
 }
-
+.dropdown__avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.dropdown__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .dropdown.active {
   display: block;
 }
