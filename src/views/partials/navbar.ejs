@@ -1,0 +1,60 @@
+<nav class="navbar">
+  <div class="navbar__logo">
+    <a href="/home"><span class="logo-mi">Mi</span>Ecommerce</a>
+  </div>
+
+  <form action="/productos/buscar" method="GET" class="navbar__search">
+    <input type="text" name="query" placeholder="Buscar productos..."/>
+    <button type="submit" class="search-btn">🔍</button>
+  </form>
+
+  <div class="navbar__actions">
+    <% if (typeof ocultarNav === 'undefined' || !ocultarNav) { %>
+      <a href="/carrito" class="navbar__icon-btn cart-btn">
+        🛒
+        <% if(cantidadCarrito > 0) { %>
+          <span class="cart-badge"><%= cantidadCarrito %></span>
+        <% } %>
+      </a>
+      <div class="navbar__icon-btn">
+        <div class="user-menu" onclick="toggleMenu()">
+          <img src="/img/olivia.jpg" alt="Olivia" class="navbar__avatar"/>
+          <span>Olivia</span>
+        </div>
+        <div class="dropdown" id="dropdown">
+          <div class="dropdown__header">
+            <div class="dropdown__avatar">
+              <img src="/img/olivia.jpg" alt="Olivia" class="dropdown__avatar-img"/>
+            </div>
+            <span>Olivia</span>
+          </div>
+          <a href="/home" class="dropdown__item">Inicio</a>
+          <a href="#" class="dropdown__item">Mis Compras</a>
+          <a href="#" class="dropdown__item">Favoritos</a>
+          <a href="#" class="dropdown__item">Historial</a>
+          <div class="dropdown__item dropdown__tema" onclick="toggleTema()">
+            ⚙️ Cambiar a Tema Claro
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</nav>
+
+<script>
+  function toggleMenu() {
+    const dropdown = document.getElementById('dropdown');
+    dropdown.classList.toggle('active');
+  }
+
+  function toggleTema() {
+    document.body.classList.toggle('tema-claro');
+  }
+
+  document.addEventListener('click', (e) => {
+    const userMenu = document.querySelector('.user-menu');
+    if (userMenu && !userMenu.contains(e.target)) {
+      document.getElementById('dropdown').classList.remove('active');
+    }
+  });
+</script>

@@ -1,0 +1,56 @@
+
+<% titulo = producto.nombre %>
+
+<div class="breadcrumb">
+  <a href="/productos">← Volver al listado</a>
+  <span> › <%= producto.categoria %></span>
+</div>
+
+<div class="detalle">
+  <div class="detalle__imagen">
+   <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>" onerror="this.src='/img/fallback.jpg'"/>
+  </div>
+  <div class="detalle__info">
+    <h1><%= producto.nombre %></h1>
+    <p class="detalle__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+
+<% if (producto.stock === 0){ %>
+<p class="badge-sin-stock">Sin stock</p>
+<button class="btn-agregar" disabled>Agregar al Carrito</button>
+<% } else { %>
+    <form action="/carrito/agregar" method="POST">
+      <input type="hidden" name="id" value="<%= producto.id %>"/>
+      <input type="hidden" name="nombre" value="<%= producto.nombre %>"/>
+      <input type="hidden" name="precio" value="<%= producto.precio %>"/>
+      <input type="hidden" name="imagen" value="<%= producto.imagen %>"/>
+      <button type="submit" class="btn-agregar">Agregar al Carrito</button>
+    </form>
+<% } %>
+
+    <p class="detalle__descripcion"><%= producto.descripcion %></p>
+     <p class="detalle__categoria">Categoría: <%= producto.categoria %></p>
+  </div>
+</div>
+
+<div class="relacionados">
+  <h2>También te puede interesar</h2>
+  <% if (relacionados.length === 0) { %>
+    <p>No hay productos relacionados disponibles.</p>
+  <% } else  { %>
+  <div class="productos-grid">
+    <% relacionados.forEach(p => { %>
+      <% if(p.id !== producto.id) { %>
+        <a href="/productos/<%= p.id %>">
+          <div class="producto-card">
+            <img src="/img/<%= p.imagen %>" alt="<%= p.nombre %>" onerror="this.src='/img/fallback.jpg'"/>
+            <div class="producto-card__info">
+              <p class="producto-card__nombre"><%= p.nombre %></p>
+              <p class="producto-card__precio"><%= p.precio %> <span>PUNTOS</span></p>
+            </div>
+          </div>
+        </a>
+      <% } %>
+    <% }) %>
+  </div>
+   <% } %>
+</div>

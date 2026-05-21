@@ -1,0 +1,53 @@
+<% titulo = 'MiEcommerce - Inicio' %>
+
+<div class="categorias">
+  <a href="/productos/categoria/Electrónica" class="categoria-item">🖥️ <span>Electrónica</span></a>
+  <a href="/productos/categoria/Alimentos" class="categoria-item">🍔 <span>Alimentos</span></a>
+  <a href="/productos/categoria/Bebidas" class="categoria-item">🍺 <span>Bebidas</span></a>
+  <a href="/productos/categoria/Indumentaria" class="categoria-item">👕 <span>Indumentaria</span></a>
+  <a href="/productos/categoria/Juegos" class="categoria-item">🎮 <span>Juegos</span></a>
+  <a href="/productos/categoria/Automotor" class="categoria-item">🚗 <span>Automotor</span></a>
+  <a href="/productos/categoria/Hogar" class="categoria-item">🛋️ <span>Hogar</span></a>
+  <a href="/productos/categoria/Otros" class="categoria-item">🎁 <span>Otros</span></a>
+</div>
+
+<div class="banner">
+  <div class="banner-card">
+    <img src="/img/disney.png" alt="Disney+" onerror="this.style.display='none'"/>
+  </div>
+  <div class="banner-card">
+    <img src="/img/hbo.png" alt="HBO Max" onerror="this.style.display='none'"/>
+  </div>
+</div>
+
+<!-- US6 - Productos sugeridos -->
+<h2 class="seccion-titulo">Te puede interesar</h2>
+<div class="productos-grid">
+  <% sugeridos.forEach(producto => { %>
+    <a href="/productos/<%= producto.id %>">
+      <div class="producto-card">
+        <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
+        <div class="producto-card__info">
+          <p class="producto-card__nombre"><%= producto.nombre %></p>
+          <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+        </div>
+      </div>
+    </a>
+  <% }) %>
+</div>
+
+<!-- US7 - Más pedidos -->
+<h2 class="seccion-titulo">Los más pedidos</h2>
+<div class="productos-grid">
+  <% masPedidos.forEach(producto => { %>
+    <a href="/productos/<%= producto.id %>">
+      <div class="producto-card">
+        <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
+        <div class="producto-card__info">
+          <p class="producto-card__nombre"><%= producto.nombre %></p>
+          <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+        </div>
+      </div>
+    </a>
+  <% }) %>
+</div>

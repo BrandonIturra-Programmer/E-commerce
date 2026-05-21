@@ -1,0 +1,17 @@
+
+<% titulo = 'Login - MiEcommerce' %>
+
+<div class="auth-wrapper">
+  <div class="auth-banner"></div>
+  <div class="auth-card">
+    <h1>¡Hola!</h1>
+  <form action="/auth/login" method="POST">
+  <input type="text" name="usuario" placeholder="Tu nombre de usuario" class="auth-input"/>
+  <input type="password" name="password" placeholder="Tu contraseña" class="auth-input"/>
+  <button class="auth-btn">Iniciar Sesión</button>
+</form>
+    <p class="auth-link">
+      ¿No tienes cuenta? <a href="/auth/registro">Regístrate</a>
+    </p>
+  </div>
+</div>

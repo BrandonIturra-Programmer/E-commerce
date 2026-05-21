@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title><%= typeof titulo !== 'undefined' ? titulo : 'MiEcommerce' %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <%- include('navbar') %>
+  <main class="container">
+    <%- body %>
+  </main>
+  <%- include('footer') %>
+</body>
+
+</html>

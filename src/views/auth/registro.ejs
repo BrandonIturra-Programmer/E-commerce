@@ -1,0 +1,30 @@
+
+<% titulo = 'Registro - MiEcommerce' %>
+
+<div class="auth-wrapper">
+  <div class="auth-banner"></div>
+  <div class="auth-card">
+    <h1>¡Registrate!</h1>
+
+    <% if(errores.length > 0) { %>
+      <div class="auth-errores">
+        <% errores.forEach(error => { %>
+          <p>⚠️ <%= error %></p>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <form action="/auth/registro" method="POST">
+      <input type="text" name="nombre" placeholder="Tu nombre" class="auth-input"/>
+      <input type="text" name="apellido" placeholder="Tu apellido" class="auth-input"/>
+      <input type="email" name="email" placeholder="Tu email" class="auth-input"/>
+      <input type="password" name="password" placeholder="Tu nueva contraseña" class="auth-input"/>
+      <input type="password" name="repetirPassword" placeholder="Repite tu contraseña" class="auth-input"/>
+      <button type="submit" class="auth-btn">Crear Cuenta</button>
+    </form>
+
+    <p class="auth-link">
+      ¿Ya tienes cuenta? <a href="/auth/login">Inicia Sesión</a>
+    </p>
+  </div>
+</div>
