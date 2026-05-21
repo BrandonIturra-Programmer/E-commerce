@@ -31,7 +31,7 @@
 <!-- US6 - Productos sugeridos -->
 <h2 class="seccion-titulo">Te puede interesar</h2>
 <div class="productos-grid">
-  <% destacados.forEach(producto => { %>
+  <% sugeridos.forEach(producto => { %>
     <a href="/productos/<%= producto.id %>">
       <div class="producto-card">
         <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>

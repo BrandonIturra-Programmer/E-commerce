@@ -1,0 +1,28 @@
+<% titulo = 'Categoría: ' + categoria %>
+
+<div class="breadcrumb">
+  <a href="/home">← Volver al inicio</a>
+</div>
+
+<h2 class="seccion-titulo">Categoría: <%= categoria %></h2>
+
+<% if (productos.length === 0) { %>
+  <p>No hay productos disponibles en esta categoría.</p>
+<% } else { %>
+  <div class="productos-grid">
+    <% productos.forEach(producto => { %>
+      <a href="/productos/<%= producto.id %>">
+        <div class="producto-card">
+          <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>" onerror="this.src='/img/fallback.jpg'"/>
+          <div class="producto-card__info">
+            <p class="producto-card__nombre"><%= producto.nombre %></p>
+            <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+            <% if (producto.stock === 0) { %>
+              <span class="badge-sin-stock">Sin stock</span>
+            <% } %>
+          </div>
+        </div>
+      </a>
+    <% }) %>
+  </div>
+<% } %>
