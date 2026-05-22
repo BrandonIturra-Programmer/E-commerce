@@ -1,3 +1,5 @@
+const db = require('../../db/database');
+
 const getCarrito = (req) => {
   if (!req.session.carrito) {
     req.session.carrito = [];
@@ -6,13 +8,24 @@ const getCarrito = (req) => {
 };
 
 const agregarProducto = (req, producto) => {
+  // US4 - Validar que el producto existe en la DB y obtener precio real
+  const productoDb = db.prepare('SELECT * FROM products WHERE id = ?').get(producto.id);
+
+  if (!productoDb) return; // Si no existe en la DB, no lo agregamos
+
   const carrito = getCarrito(req);
-  const existente = carrito.find(p => p.id === producto.id);
+  const existente = carrito.find(p => p.id === productoDb.id);
 
   if (existente) {
     existente.cantidad += 1;
   } else {
-    carrito.push({ ...producto, cantidad: 1 });
+    carrito.push({
+      id: productoDb.id,
+      nombre: productoDb.nombre,
+      precio: productoDb.precio, // precio real desde la DB
+      imagen: productoDb.imagen,
+      cantidad: 1
+    });
   }
 
   req.session.carrito = carrito;
