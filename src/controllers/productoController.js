@@ -1,13 +1,16 @@
 const productosService = require('../services/productsService');
+const db = require('../../db/database');
 
-// US17 - Normalizacion de IDs
+// US5 - Normalización de IDs con DB
 const normalizeId = (id) => {
   const parsed = parseInt(id);
   if (isNaN(parsed)) return null;
+
+  const existe = db.prepare('SELECT id FROM products WHERE id = ?').get(parsed);
+  if (!existe) return null;
+
   return parsed;
 };
-
-//US18 - Ordenar por precio 
 
 const listarProductos = (req, res) => {
   let productos = productosService.getAll();
@@ -21,19 +24,15 @@ const listarProductos = (req, res) => {
 
   res.render('productos/lista', { productos, sort });
 };
+
 const verDetalle = (req, res) => {
   const id = normalizeId(req.params.id);
 
   if (id === null) {
-    return res.status(400).render('404');
-  }
-
-  const producto = productosService.getById(id);
-
-  if (!producto) {
     return res.status(404).render('404');
   }
 
+  const producto = productosService.getById(id);
   const relacionados = productosService.getByCategoria(producto.categoria)
     .filter(p => p.id !== producto.id)
     .slice(0, 4);
@@ -46,7 +45,7 @@ const listarPorCategoria = (req, res) => {
   const productos = productosService.getByCategoria(categoria);
   res.render('productos/categoria', { productos, categoria });
 };
-// US19 - Buscador
+
 const buscarProductos = (req, res) => {
   const query = req.query.query || '';
   const productos = productosService.buscar(query);
