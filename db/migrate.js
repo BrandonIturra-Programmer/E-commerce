@@ -27,4 +27,4 @@ const migrarTodos = db.transaction((lista) => {
 });
 
 migrarTodos(productos);
-console.log(`✅ ${productos.length} productos migrados correctamente.`);
+console.log(`✅ ${productos.length} Productos Migrados..!!`);
