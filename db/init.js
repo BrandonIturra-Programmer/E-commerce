@@ -15,4 +15,4 @@ for (const statement of statements) {
   db.prepare(statement).run();
 }
 
-console.log('✅ Base de datos inicializada correctamente.');
+console.log('✅ BS INICIALIZADA');
