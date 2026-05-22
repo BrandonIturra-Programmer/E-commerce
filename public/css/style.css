@@ -352,9 +352,9 @@ a {
 .categorias {
   display: flex;
   justify-content: space-between;
-  background-color: #3D3D3D;
-  border-radius: 8px;
-  padding: 16px;
+  background-color: #444;
+  border-radius: 12px;
+  padding: 8px 16px;
   margin-bottom: 24px;
 }
 
@@ -362,50 +362,113 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: white;
-  font-size: 13px;
+  gap: 10px;
+  color: rgba(255,255,255,0.95);
+  font-size: 14px;
   cursor: pointer;
-  padding: 8px 16px;
-  border-right: 1px solid #555;
+  padding: 16px 20px;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  flex: 1;
+  text-align: center;
 }
 
 .categoria-item:last-child {
   border-right: none;
 }
 
-.categoria-item:hover {
+.categoria-item span {
+  font-size: 13px;
+  color: rgba(255,255,255,0.95);
+}
+
+.categoria-item i {
+  font-size: 24px;
+  color: rgba(255,255,255,0.95);
+}
+
+.categoria-item:hover span {
   color: #00A896;
 }
 
+.categoria-item:hover i {
+  color: #00A896;
+}
+
+
 /* ===== BANNER ===== */
+.banner-wrapper {
+  background-color: #00A896;
+  width: 100%;
+  padding-bottom: 5px;
+  margin-top: 24px;
+}
+
 .banner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  background-color: #00A896;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px 25px 20px;
 }
-
 
 .banner-card {
   border-radius: 10px;
-  min-height: 180px;
+  min-height: 260px;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   overflow: hidden;
+  position: relative;
+  height: 100%;
+  margin-top: -60px;
+  transition: transform 0.3s ease;
+}
+
+.banner-card:hover {
+  transform: translateY(-8px); 
+}
+
+.banner-card-disney {
+  background-image: url('/img/disney.png');
+}
+
+.banner-card-hbo {
+  background-image: url('/img/hbo.png');
+}
+
+.banner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.banner-logo {
+  width: 100px;
+  height: 70px;
+  object-position: center;
+  background: white;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.banner-info {
+  color: white;
 }
 
 .banner-descuento {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 4px;
 }
 
 .banner-detalle {
-  font-size: 13px;
+  font-size: 15px;
   opacity: 0.9;
 }
 
