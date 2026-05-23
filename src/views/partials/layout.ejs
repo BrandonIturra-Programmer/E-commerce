@@ -11,9 +11,15 @@
 
 <body>
   <%- include('navbar') %>
-  <main class="container">
-    <%- body %>
-  </main>
+  <% if (typeof ocultarNav !== 'undefined' && ocultarNav) { %>
+    <main>
+      <%- body %>
+    </main>
+  <% } else { %>
+    <main class="container">
+      <%- body %>
+    </main>
+  <% } %>
   <%- include('footer') %>
 </body>
 
