@@ -1,10 +1,9 @@
-
 <% titulo = 'Registro - MiEcommerce' %>
 
 <div class="auth-wrapper">
   <div class="auth-banner"></div>
   <div class="auth-card">
-    <h1>¡Registrate!</h1>
+    <h1>¡Registro!</h1>
 
     <% if(errores.length > 0) { %>
       <div class="auth-errores">
@@ -15,11 +14,26 @@
     <% } %>
 
     <form action="/auth/registro" method="POST">
-      <input type="text" name="nombre" placeholder="Tu nombre" class="auth-input"/>
-      <input type="text" name="apellido" placeholder="Tu apellido" class="auth-input"/>
-      <input type="email" name="email" placeholder="Tu email" class="auth-input"/>
-      <input type="password" name="password" placeholder="Tu nueva contraseña" class="auth-input"/>
-      <input type="password" name="repetirPassword" placeholder="Repite tu contraseña" class="auth-input"/>
+      <div class="auth-input-group">
+        <i class="fa-regular fa-user auth-input-icon"></i>
+        <input type="text" name="nombre" placeholder="Nombre" class="auth-input"/>
+      </div>
+      <div class="auth-input-group">
+        <i class="fa-regular fa-user auth-input-icon"></i>
+        <input type="text" name="apellido" placeholder="Apellido" class="auth-input"/>
+      </div>
+      <div class="auth-input-group">
+        <i class="fa-regular fa-envelope auth-input-icon"></i>
+        <input type="email" name="email" placeholder="Email" class="auth-input"/>
+      </div>
+      <div class="auth-input-group">
+        <i class="fa-solid fa-lock auth-input-icon"></i>
+        <input type="password" name="password" placeholder="Contraseña" class="auth-input"/>
+      </div>
+      <div class="auth-input-group">
+        <i class="fa-solid fa-lock auth-input-icon"></i>
+        <input type="password" name="repetirPassword" placeholder="Repite tu contraseña" class="auth-input"/>
+      </div>
       <button type="submit" class="auth-btn">Crear Cuenta</button>
     </form>
 

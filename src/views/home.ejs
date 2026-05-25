@@ -64,14 +64,18 @@
 
 <!-- US6 - Productos sugeridos -->
 <h2 class="seccion-titulo">Te puede interesar</h2>
-<div class="productos-grid">
+<div class="productos-horizontal">
   <% sugeridos.forEach(producto => { %>
-    <a href="/productos/<%= producto.id %>">
-      <div class="producto-card">
-        <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
-        <div class="producto-card__info">
-          <p class="producto-card__nombre"><%= producto.nombre %></p>
-          <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+    <a href="/productos/<%= producto.id %>" class="producto-card-h">
+      <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
+      <div class="producto-card-h__bottom">
+        <div class="producto-card-h__bottom-info">
+          <p class="producto-card-h__nombre"><%= producto.nombre %></p>
+          <p class="producto-card-h__precio"><%= producto.precio.toLocaleString() %> <span>PUNTOS</span></p>
+        </div>
+        <div class="producto-card-h__separador"></div>
+        <div class="producto-card-h__carrito">
+          <i class="fa-solid fa-cart-shopping"></i>
         </div>
       </div>
     </a>
@@ -80,14 +84,19 @@
 
 <!-- US7 - Más pedidos -->
 <h2 class="seccion-titulo">Los más pedidos</h2>
-<div class="productos-grid">
+<div class="productos-horizontal">
   <% masPedidos.forEach(producto => { %>
-    <a href="/productos/<%= producto.id %>">
-      <div class="producto-card">
-        <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
-        <div class="producto-card__info">
-          <p class="producto-card__nombre"><%= producto.nombre %></p>
-          <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
+    <a href="/productos/<%= producto.id %>" class="producto-card-h">
+      <div class="producto-card-h__top-badge">TOP</div>
+      <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>"/>
+      <div class="producto-card-h__bottom">
+        <div class="producto-card-h__bottom-info">
+          <p class="producto-card-h__nombre"><%= producto.nombre %></p>
+          <p class="producto-card-h__precio"><%= producto.precio.toLocaleString() %> <span>PUNTOS</span></p>
+        </div>
+        <div class="producto-card-h__separador"></div>
+        <div class="producto-card-h__carrito">
+          <i class="fa-solid fa-cart-shopping"></i>
         </div>
       </div>
     </a>
