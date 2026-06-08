@@ -9,11 +9,18 @@ body {
   font-family: Arial, sans-serif;
   background-color: #F0F0F0;
   color: #333333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+main {
+  flex: 1;
 }
 
 /* ===== NAVBAR ===== */
@@ -156,7 +163,7 @@ a {
   background-color: #ffffff;
   padding: 20px 24px;
   margin-top: 40px;
-  font-size: 13px;
+  font-size: 15px;
   color: #888;
 }
 
@@ -166,9 +173,17 @@ a {
   font-size: 18px;
 }
 
+.footer__social a:hover {
+  color: #333;
+}
+
 .footer__apps {
   display: flex;
   gap: 16px;
+}
+
+.footer__apps a:hover {
+  color: #333;
 }
 
 /* ===== CONTAINER ===== */
@@ -176,6 +191,7 @@ a {
   max-width: 1100px;
   margin: 0 auto;
   padding: 24px;
+  width: 100%;
 }
 
 /* ===== BREADCRUMB ===== */
@@ -183,6 +199,8 @@ a {
   font-size: 14px;
   color: #888;
   margin-bottom: 20px;
+  text-align: left;
+  width: 100%;
 }
 
 .breadcrumb a {
@@ -309,10 +327,10 @@ a {
 .auth-wrapper {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 62px);
   display: flex;
   justify-content: center;
-  align-items: center; /* Centrado vertical absoluto */
+  align-items: center;
   background-color: #F0F0F0;
   overflow: hidden;
 }
@@ -322,30 +340,24 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  height: 280px;
-  background-color: #00A896;
-  /* Imagen con el patrón geométrico */
+  height: 50%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 800'%3E%3Cpath d='M-100-100 L1300-100 L1300 900 L-100 900 Z' fill='%2300A896'/%3E%3Cg stroke='%23ffffff' stroke-width='1.5' stroke-opacity='0.12'%3E%3Cline x1='100' y1='100' x2='250' y2='220' /%3E%3Cline x1='250' y1='220' x2='400' y2='80' /%3E%3Cline x1='400' y1='80' x2='100' y2='100' /%3E%3Cline x1='250' y1='220' x2='200' y2='400' /%3E%3Cline x1='100' y1='100' x2='200' y2='400' /%3E%3Cline x1='400' y1='80' x2='550' y2='250' /%3E%3Cline x1='250' y1='220' x2='550' y2='250' /%3E%3Cline x1='200' y1='400' x2='450' y2='450' /%3E%3Cline x1='250' y1='220' x2='450' y2='450' /%3E%3Cline x1='550' y1='250' x2='450' y2='450' /%3E%3Cline x1='550' y1='250' x2='750' y2='120' /%3E%3Cline x1='400' y1='80' x2='750' y2='120' /%3E%3Cline x1='750' y1='120' x2='900' y2='300' /%3E%3Cline x1='550' y1='250' x2='900' y2='300' /%3E%3Cline x1='450' y1='450' x2='700' y2='500' /%3E%3Cline x1='550' y1='250' x2='700' y2='500' /%3E%3Cline x1='900' y1='300' x2='700' y2='500' /%3E%3Cline x1='900' y1='300' x2='1100' y2='100' /%3E%3Cline x1='750' y1='120' x2='1100' y2='100' /%3E%3Cline x1='1100' y1='100' x2='1250' y2='280' /%3E%3Cline x1='900' y1='300' x2='1250' y2='280' /%3E%3Cline x1='700' y1='500' x2='950' y2='550' /%3E%3Cline x1='900' y1='300' x2='950' y2='550' /%3E%3Cline x1='1250' y1='280' x2='950' y2='550' /%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Ccircle cx='100' cy='100' r='3' /%3E%3Ccircle cx='250' cy='220' r='3' /%3E%3Ccircle cx='400' cy='80' r='3' /%3E%3Ccircle cx='200' cy='400' r='3' /%3E%3Ccircle cx='550' cy='250' r='3' /%3E%3Ccircle cx='450' cy='450' r='3' /%3E%3Ccircle cx='750' cy='120' r='3' /%3E%3Ccircle cx='900' cy='300' r='3' /%3E%3Ccircle cx='700' cy='500' r='3' /%3E%3Ccircle cx='1100' cy='100' r='3' /%3E%3Ccircle cx='1250' cy='280' r='3' /%3E%3Ccircle cx='950' cy='550' r='3' /%3E%3C/g%3E%3C/svg%3E");
-  background-size: 100% auto; /* Forzar al grafo a estirarse a lo ancho de forma limpia */
-  background-position: center 30%; /* Centrar verticalmente el patrón en la franja */
+  background-size: cover;
+  background-position: center;
   z-index: 1;
 }
 
-.auth-wrapper .auth-banner {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-}
+
 
 .auth-card {
   position: relative;
   z-index: 2;
   background: white;
   border-radius: 16px;
-  padding: 35px 30px; /* Reducción de paddings internos para compactar la tarjeta */
+  padding: 35px 30px;
   width: 100%;
-  max-width: 400px; /* Estrechada levemente para que se vea estilizada */
-  margin-top: 40px; /* Posicionamiento exacto respecto al centro del banner */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
 }
@@ -577,6 +589,8 @@ form {
   color: #333;
   margin-bottom: 16px;
   margin-top: 8px;
+  text-align: left;
+  width: 100%;
 }
 
 /* ===== CARRITO ===== */
@@ -882,6 +896,23 @@ form {
   cursor: not-allowed;
 }
 
+/* ===== SECCION VACIA ===== */
+.seccion-vacia {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  gap: 30px;
+  text-align: center;
+}
+
+.seccion-vacia p {
+  color: #888;
+  font-size: 16px;
+}
+
 /* ===== PRODUCTOS HORIZONTAL ===== */
 .productos-horizontal {
   display: grid;
@@ -914,6 +945,8 @@ form {
   height: 200px;
   object-fit: cover;
   flex-shrink: 0;
+  display: block;
+  background-color: #f0f0f0;
 }
 
 .producto-card-h__bottom {

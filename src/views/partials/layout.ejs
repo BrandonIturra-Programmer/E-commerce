@@ -12,15 +12,13 @@
 <body>
   <%- include('navbar') %>
   <% if (typeof ocultarNav !== 'undefined' && ocultarNav) { %>
-    <main>
+    <main style="flex: 0;">
       <%- body %>
     </main>
   <% } else { %>
     <main class="container">
       <%- body %>
     </main>
+    <%- include('footer') %>
   <% } %>
-  <%- include('footer') %>
 </body>
-
-</html>

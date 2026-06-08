@@ -7,20 +7,26 @@
 <h2 class="seccion-titulo">Resultados para: "<%= query %>"</h2>
 
 <% if (productos.length === 0) { %>
-  <p>No se encontraron productos para "<%= query %>".</p>
-  <a href="/home">Volver al inicio</a>
+  <div class="seccion-vacia">
+    <p>No se encontraron productos para "<%= query %>"</p>
+    <a href="/home" class="btn-error">Volver al inicio</a>
+  </div>
 <% } else { %>
-  <div class="productos-grid">
+  <div class="productos-horizontal">
     <% productos.forEach(producto => { %>
-      <a href="/productos/<%= producto.id %>">
-        <div class="producto-card">
-          <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>" onerror="this.src='/img/fallback.jpg'"/>
-          <div class="producto-card__info">
-            <p class="producto-card__nombre"><%= producto.nombre %></p>
-            <p class="producto-card__precio"><%= producto.precio %> <span>PUNTOS</span></p>
-            <% if (producto.stock === 0) { %>
-              <span class="badge-sin-stock">Sin stock</span>
-            <% } %>
+      <a href="/productos/<%= producto.id %>" class="producto-card-h">
+        <% if (producto.stock === 0) { %>
+          <div class="producto-card-h__top-badge" style="background-color:#cc0000;">Sin stock</div>
+        <% } %>
+        <img src="/img/<%= producto.imagen %>" alt="<%= producto.nombre %>" onerror="this.src='/img/fallback.jpg'"/>
+        <div class="producto-card-h__bottom">
+          <div class="producto-card-h__bottom-info">
+            <p class="producto-card-h__nombre"><%= producto.nombre %></p>
+            <p class="producto-card-h__precio"><%= producto.precio.toLocaleString() %> <span>PUNTOS</span></p>
+          </div>
+          <div class="producto-card-h__separador"></div>
+          <div class="producto-card-h__carrito">
+            <i class="fa-solid fa-cart-shopping"></i>
           </div>
         </div>
       </a>
