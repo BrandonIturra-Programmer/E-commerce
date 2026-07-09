@@ -3,7 +3,9 @@ import './MainArea.css';
 function MainArea({ children }) {
   return (
     <div className="main-area">
-      {children}
+      <div className="main-area__content">
+        {children}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,26 @@
+.header {
+  height: 72px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header__title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
