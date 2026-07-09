@@ -36,11 +36,17 @@ const productosRouter = require('./src/routes/productos');
 const authRouter = require('./src/routes/auth');
 const homeRouter = require('./src/routes/home');
 const carritoRouter = require('./src/routes/carrito');
+const categoriasRouter = require('./src/routes/categorias');
+const usuariosRouter = require('./src/routes/usuarios');
+
 
 app.use('/productos', productosRouter);
 app.use('/auth', authRouter);
 app.use('/home', homeRouter);
 app.use('/carrito', carritoRouter);
+app.use('/categorias', categoriasRouter);
+app.use('/usuarios', usuariosRouter);
+
 
 // Ruta principal
 app.get('/', (req, res) => {

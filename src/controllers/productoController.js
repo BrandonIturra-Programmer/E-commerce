@@ -1,55 +1,128 @@
 const productosService = require('../services/productsService');
 const db = require('../../db/database');
 
-// US5 - Normalización de IDs con DB
-const normalizeId = (id) => {
-  const parsed = parseInt(id);
-  if (isNaN(parsed)) return null;
-
-  const existe = db.prepare('SELECT id FROM products WHERE id = ?').get(parsed);
-  if (!existe) return null;
-
-  return parsed;
-};
-
+// ─── GET /productos ────────────────────────────────────────────────────────────
 const listarProductos = (req, res) => {
-  let productos = productosService.getAll();
+  try {
+    let productos = productosService.getAll();
 
-  const sort = req.query.sort;
-  if (sort === 'asc') {
-    productos = productos.slice().sort((a, b) => a.precio - b.precio);
-  } else if (sort === 'desc') {
-    productos = productos.slice().sort((a, b) => b.precio - a.precio);
+    const { sort } = req.query;
+    if (sort === 'asc') {
+      productos = productos.slice().sort((a, b) => a.precio - b.precio);
+    } else if (sort === 'desc') {
+      productos = productos.slice().sort((a, b) => b.precio - a.precio);
+    }
+
+    res.json(productos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los productos' });
   }
-
-  res.render('productos/lista', { productos, sort });
 };
 
+// ─── GET /productos/:id ────────────────────────────────────────────────────────
 const verDetalle = (req, res) => {
-  const id = normalizeId(req.params.id);
+  try {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ error: 'ID inválido' });
 
-  if (id === null) {
-    return res.status(404).render('404');
+    const producto = productosService.getById(id);
+    if (!producto) return res.status(404).json({ error: 'Producto no encontrado' });
+
+    res.json(producto);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el producto' });
   }
-
-  const producto = productosService.getById(id);
-  const relacionados = productosService.getByCategoria(producto.categoria)
-    .filter(p => p.id !== producto.id)
-    .slice(0, 4);
-
-  res.render('productos/detalle', { producto, relacionados });
 };
 
-const listarPorCategoria = (req, res) => {
-  const categoria = req.params.categoria;
-  const productos = productosService.getByCategoria(categoria);
-  res.render('productos/categoria', { productos, categoria });
+// ─── POST /productos ───────────────────────────────────────────────────────────
+const crearProducto = (req, res) => {
+  try {
+    const { nombre, precio, descripcion, imagen, categoria_id, stock, destacado, masPedido } = req.body;
+
+    if (!nombre || !precio || !categoria_id) {
+      return res.status(400).json({ error: 'nombre, precio y categoria_id son obligatorios' });
+    }
+
+    const resultado = db.prepare(`
+      INSERT INTO products (nombre, precio, descripcion, imagen, categoria_id, stock, destacado, masPedido)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      nombre,
+      precio,
+      descripcion || null,
+      imagen || null,
+      categoria_id,
+      stock || 0,
+      destacado || 0,
+      masPedido || 0
+    );
+
+    const nuevo = productosService.getById(resultado.lastInsertRowid);
+    res.status(201).json(nuevo);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear el producto' });
+  }
 };
 
+// ─── PUT /productos/:id ────────────────────────────────────────────────────────
+const modificarProducto = (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ error: 'ID inválido' });
+
+    const producto = productosService.getById(id);
+    if (!producto) return res.status(404).json({ error: 'Producto no encontrado' });
+
+    const { nombre, precio, descripcion, imagen, categoria_id, stock, destacado, masPedido } = req.body;
+
+    db.prepare(`
+      UPDATE products
+      SET nombre = ?, precio = ?, descripcion = ?, imagen = ?, categoria_id = ?, stock = ?, destacado = ?, masPedido = ?
+      WHERE id = ?
+    `).run(
+      nombre       ?? producto.nombre,
+      precio       ?? producto.precio,
+      descripcion  ?? producto.descripcion,
+      imagen       ?? producto.imagen,
+      categoria_id ?? producto.categoria_id,
+      stock        ?? producto.stock,
+      destacado    ?? producto.destacado,
+      masPedido    ?? producto.masPedido,
+      id
+    );
+
+    const actualizado = productosService.getById(id);
+    res.json(actualizado);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al modificar el producto' });
+  }
+};
+
+// ─── DELETE /productos/:id ─────────────────────────────────────────────────────
+const eliminarProducto = (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ error: 'ID inválido' });
+
+    const producto = productosService.getById(id);
+    if (!producto) return res.status(404).json({ error: 'Producto no encontrado' });
+
+    db.prepare('DELETE FROM products WHERE id = ?').run(id);
+    res.json({ mensaje: `Producto "${producto.nombre}" eliminado correctamente` });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar el producto' });
+  }
+};
+
+// ─── GET /productos/buscar?query= ─────────────────────────────────────────────
 const buscarProductos = (req, res) => {
-  const query = req.query.query || '';
-  const productos = productosService.buscar(query);
-  res.render('productos/busqueda', { productos, query });
+  try {
+    const query = req.query.query || '';
+    const productos = productosService.buscar(query);
+    res.json(productos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al buscar productos' });
+  }
 };
 
-module.exports = { listarProductos, verDetalle, listarPorCategoria, buscarProductos };
+module.exports = { listarProductos, verDetalle, crearProducto, modificarProducto, eliminarProducto, buscarProductos };

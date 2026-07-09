@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS products (
   precio REAL NOT NULL,
   descripcion TEXT,
   imagen TEXT,
-  categoria TEXT,
+  categoria_id INTEGER,
   stock INTEGER DEFAULT 0,
   destacado INTEGER DEFAULT 0,
   masPedido INTEGER DEFAULT 0

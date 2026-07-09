@@ -1,10 +1,24 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home/Home';
+import ProductsList from './pages/Products/ProductsList/ProductsList';
+import ProductView from './pages/Products/ProductView/ProductView';
+import CategoriesList from './pages/Categories/CategoriesList/CategoriesList';
+import CategoryView from './pages/Categories/CategoryView/CategoryView';
 import './App.css';
 
 function App() {
   return (
-    <div className="app">
-      <h1>MiEcommerce Dashboard</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductsList />} />
+        <Route path="/products/new" element={<ProductView />} />
+        <Route path="/products/:id" element={<ProductView />} />
+        <Route path="/categories" element={<CategoriesList />} />
+        <Route path="/categories/new" element={<CategoryView />} />
+        <Route path="/categories/:id" element={<CategoryView />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
