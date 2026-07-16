@@ -24,9 +24,15 @@ function ProductsList() {
     fetchData();
   }, []);
 
-  const productosFiltrados = productos.filter((p) =>
-    p.nombre.toLowerCase().includes(busqueda.toLowerCase())
+const productosFiltrados = productos.filter((p) => {
+  const texto = busqueda.toLowerCase();
+  return (
+    p.nombre.toLowerCase().includes(texto) ||
+    p.descripcion?.toLowerCase().includes(texto) ||
+    p.tienda?.toLowerCase().includes(texto) ||
+    String(p.id).includes(texto)
   );
+});
 
   return (
     <div className="products-list">
