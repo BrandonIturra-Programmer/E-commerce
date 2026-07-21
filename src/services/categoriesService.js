@@ -1,7 +1,15 @@
 const db = require('../../db/database');
 
 const getAll = () => {
-  return db.prepare('SELECT * FROM categories').all();
+  return db.prepare(`
+    SELECT 
+      c.id,
+      c.nombre,
+      COUNT(p.id) AS cantidadProductos
+    FROM categories c
+    LEFT JOIN products p ON p.categoria_id = c.id
+    GROUP BY c.id
+  `).all();
 };
 
 const getById = (id) => {

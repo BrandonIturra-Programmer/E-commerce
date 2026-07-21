@@ -6,6 +6,7 @@ import ProductsList from './pages/Products/ProductsList/ProductsList';
 import ProductView from './pages/Products/ProductView/ProductView';
 import CategoriesList from './pages/Categories/CategoriesList/CategoriesList';
 import CategoryView from './pages/Categories/CategoryView/CategoryView';
+import Profile from './pages/Profile/Profile';
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/categories" element={<CategoriesList />} />
             <Route path="/categories/new" element={<CategoryView />} />
             <Route path="/categories/:id" element={<CategoryView />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </MainArea>
       </div>

@@ -83,7 +83,8 @@ function ProductView() {
   return (
     <div className="product-view">
       <Header
-        title={esNuevo ? 'Productos > Nuevo' : `Productos #${id}`}
+        title={esNuevo ? 'Productos > Nuevo' : `Producto #${id}`}
+        showBack
         actions={
           !esNuevo && (
             <button className="btn btn--danger" onClick={handleEliminar}>

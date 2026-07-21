@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProductos } from '../../../utils/api';
 import Header from '../../../components/Header/Header';
+import { FiSearch } from 'react-icons/fi';
 import './ProductsList.css';
 
 function ProductsList() {
@@ -37,11 +38,11 @@ function ProductsList() {
   return (
     <div className="products-list">
       <Header
-        title="Productos"
+        title="Lista de Productos"
         actions={
           <>
             <div className="search-wrapper">
-              <span className="search-icon">🔍</span>
+              <FiSearch size={16} color="#888" />
               <input
                 className="search-input"
                 placeholder="Buscar productos"
