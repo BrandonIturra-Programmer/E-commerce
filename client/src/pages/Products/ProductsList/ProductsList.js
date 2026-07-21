@@ -24,15 +24,15 @@ function ProductsList() {
     fetchData();
   }, []);
 
-const productosFiltrados = productos.filter((p) => {
-  const texto = busqueda.toLowerCase();
-  return (
-    p.nombre.toLowerCase().includes(texto) ||
-    p.descripcion?.toLowerCase().includes(texto) ||
-    p.tienda?.toLowerCase().includes(texto) ||
-    String(p.id).includes(texto)
-  );
-});
+  const productosFiltrados = productos.filter((p) => {
+    const texto = busqueda.toLowerCase();
+    return (
+      p.nombre.toLowerCase().includes(texto) ||
+      p.descripcion?.toLowerCase().includes(texto) ||
+      p.categoria?.toLowerCase().includes(texto) ||
+      String(p.id).includes(texto)
+    );
+  });
 
   return (
     <div className="products-list">
@@ -40,12 +40,15 @@ const productosFiltrados = productos.filter((p) => {
         title="Productos"
         actions={
           <>
-            <input
-              className="search-input"
-              placeholder="Buscar productos"
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
+            <div className="search-wrapper">
+              <span className="search-icon">🔍</span>
+              <input
+                className="search-input"
+                placeholder="Buscar productos"
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+              />
+            </div>
             <button className="btn btn--primary" onClick={() => navigate('/products/new')}>
               Agregar Producto
             </button>
@@ -55,9 +58,9 @@ const productosFiltrados = productos.filter((p) => {
 
       <div className="products-list__content">
         {loading ? (
-          <p>Cargando...</p>
+          <p className="products-list__loading">Cargando...</p>
         ) : productosFiltrados.length === 0 ? (
-            <p>No hay productos que coincidan con la búsqueda.</p>
+          <p className="products-list__empty">No hay productos que coincidan con la búsqueda.</p>
         ) : (
           productosFiltrados.map((p) => (
             <div
@@ -65,10 +68,32 @@ const productosFiltrados = productos.filter((p) => {
               className="products-list__item"
               onClick={() => navigate(`/products/${p.id}`)}
             >
-              <img src={p.imagen} alt={p.nombre} />
-              <div>
-                <p>{p.nombre}</p>
-                <span>#{p.id}</span>
+              <img src={`/img/${p.imagen}`} alt={p.nombre} />
+              
+              <div className="products-list__item-info">
+                <p className="products-list__item-nombre">{p.nombre}</p>
+                <span className="products-list__item-id">#{p.id}</span>
+              </div>
+
+              <div className="products-list__item-col">
+                <span className="products-list__label">Categoría</span>
+                <span className="products-list__badge">{p.categoria}</span>
+              </div>
+
+              <div className="products-list__item-divider"></div>
+
+              <div className="products-list__item-col">
+                <span className="products-list__label">Precio</span>
+                <span className="products-list__precio">${p.precio.toLocaleString()}</span>
+              </div>
+
+              <div className="products-list__item-divider"></div>
+
+              <div className="products-list__item-col">
+                <span className="products-list__label">Stock</span>
+                <span className="products-list__stock">
+                  ✅ {p.stock} unidades
+                </span>
               </div>
             </div>
           ))

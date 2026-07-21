@@ -94,6 +94,7 @@ const modificarProducto = (req, res) => {
     const actualizado = productosService.getById(id);
     res.json(actualizado);
   } catch (error) {
+    console.error('Error modificar producto:', error);
     res.status(500).json({ error: 'Error al modificar el producto' });
   }
 };
