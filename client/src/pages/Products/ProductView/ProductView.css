@@ -50,6 +50,29 @@
   text-align: center;
 }
 
+/* URL input - solo modo nuevo */
+.product-view__url-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.product-view__url-input label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+.product-view__url-input input {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+}
+
 /* Panel derecho */
 .product-view__right {
   flex: 1;
@@ -93,6 +116,20 @@
   background-color: #fafafa;
   width: 100%;
   box-sizing: border-box;
+}
+
+.product-view__field input:disabled,
+.product-view__field textarea:disabled,
+.product-view__field select:disabled {
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: default;
+  border-color: #f0f0f0;
+}
+
+.stock-control button:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 .product-view__field input:focus,

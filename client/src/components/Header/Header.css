@@ -50,3 +50,21 @@
   align-items: center;
   gap: 12px;
 }
+
+.header__menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+@media (max-width: 1024px) {
+  .header__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

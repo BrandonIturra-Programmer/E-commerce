@@ -1,22 +1,12 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FiHome, FiBox, FiTag, FiUser, FiMenu } from 'react-icons/fi';
+import { FiHome, FiBox, FiTag, FiUser } from 'react-icons/fi';
 import './Sidebar.css';
 
-function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => setIsOpen(!isOpen);
-  const closeSidebar = () => setIsOpen(false);
-
+function Sidebar({ isOpen, onClose }) {
   return (
     <>
-      <button className="sidebar__toggle" onClick={toggleSidebar}>
-        <FiMenu size={20} />
-      </button>
-
       {isOpen && (
-        <div className="sidebar__overlay" onClick={closeSidebar}></div>
+        <div className="sidebar__overlay" onClick={onClose}></div>
       )}
 
       <aside className={`sidebar ${isOpen ? 'sidebar--open' : ''}`}>
@@ -28,7 +18,7 @@ function Sidebar() {
           <NavLink
             to="/"
             className={({ isActive }) => isActive ? 'sidebar__item sidebar__item--active' : 'sidebar__item'}
-            onClick={closeSidebar}
+            onClick={onClose}
             end
           >
             <FiHome size={18} />
@@ -38,7 +28,7 @@ function Sidebar() {
           <NavLink
             to="/products"
             className={({ isActive }) => isActive ? 'sidebar__item sidebar__item--active' : 'sidebar__item'}
-            onClick={closeSidebar}
+            onClick={onClose}
           >
             <FiBox size={18} />
             <span>Productos</span>
@@ -47,7 +37,7 @@ function Sidebar() {
           <NavLink
             to="/categories"
             className={({ isActive }) => isActive ? 'sidebar__item sidebar__item--active' : 'sidebar__item'}
-            onClick={closeSidebar}
+            onClick={onClose}
           >
             <FiTag size={18} />
             <span>Categorías</span>
@@ -55,7 +45,7 @@ function Sidebar() {
         </nav>
 
         <div className="sidebar__profile">
-          <NavLink to="/profile" className="sidebar__item" onClick={closeSidebar}>
+          <NavLink to="/profile" className="sidebar__item" onClick={onClose}>
             <FiUser size={18} />
             <span>Olivia</span>
           </NavLink>

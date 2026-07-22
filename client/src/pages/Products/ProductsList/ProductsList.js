@@ -69,7 +69,16 @@ function ProductsList() {
               className="products-list__item"
               onClick={() => navigate(`/products/${p.id}`)}
             >
-              <img src={`/img/${p.imagen}`} alt={p.nombre} />
+              <img 
+                src={
+                 p.imagen
+                  ? p.imagen.startsWith('http')
+                  ? p.imagen
+                  : `/img/${p.imagen}`
+                 : 'https://placehold.co/300x200?text=Sin+imagen'
+                } 
+                alt={p.nombre} 
+              />
               
               <div className="products-list__item-info">
                 <p className="products-list__item-nombre">{p.nombre}</p>
@@ -92,8 +101,8 @@ function ProductsList() {
 
               <div className="products-list__item-col">
                 <span className="products-list__label">Stock</span>
-                <span className="products-list__stock">
-                  ✅ {p.stock} unidades
+                <span className={`products-list__stock ${p.stock === 0 ? 'products-list__stock--sin-stock' : ''}`}>
+                  {p.stock === 0 ? '❌ Sin stock' : `✅ ${p.stock} unidades`}
                 </span>
               </div>
             </div>

@@ -5,6 +5,7 @@ import {
   getCategoriaPorId,
   updateCategoria,
   deleteCategoria,
+  createCategoria,
 } from '../../../utils/api';
 import Header from '../../../components/Header/Header';
 import './CategoryView.css';
@@ -15,6 +16,15 @@ const COLORES = {
   'Accesorios':   { bg: '#e8f4fd', color: '#1a6fa0' },
   'Hogar':        { bg: '#e8f8f0', color: '#1a7a44' },
 };
+
+const COLORES_DISPONIBLES = [
+  { nombre: 'Rojo',     bg: '#fde8e8', color: '#c0392b', dot: '#e74c3c' },
+  { nombre: 'Amarillo', bg: '#fef9e7', color: '#b7770d', dot: '#f1c40f' },
+  { nombre: 'Azul',     bg: '#e8f4fd', color: '#1a6fa0', dot: '#3498db' },
+  { nombre: 'Verde',    bg: '#e8f8f0', color: '#1a7a44', dot: '#2ecc71' },
+  { nombre: 'Violeta',  bg: '#f3e8fd', color: '#6c3483', dot: '#9b59b6' },
+  { nombre: 'Naranja',  bg: '#fef0e7', color: '#b7510d', dot: '#e67e22' },
+];
 
 const getColor = (nombre) => {
   return COLORES[nombre] || { bg: '#f0f0f0', color: '#555' };
@@ -30,6 +40,8 @@ function CategoryView() {
   const [loading, setLoading] = useState(!esNuevo);
   const [editandoNombre, setEditandoNombre] = useState(false);
   const [nombreTemp, setNombreTemp] = useState('');
+  const [nombreNuevo, setNombreNuevo] = useState('');
+  const [colorSeleccionado, setColorSeleccionado] = useState(COLORES_DISPONIBLES[0]);
 
   useEffect(() => {
     if (!esNuevo) {
@@ -61,41 +73,93 @@ function CategoryView() {
     setProductos((prev) => prev.filter((p) => p.id !== productoId));
   };
 
-  const handleStock = async (producto, delta) => {
-    const nuevoStock = Math.max(0, producto.stock + delta);
-    await fetch(`/productos/${producto.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...producto, stock: nuevoStock }),
-    });
-    setProductos((prev) =>
-      prev.map((p) => (p.id === producto.id ? { ...p, stock: nuevoStock } : p))
-    );
+  const handleGuardarNueva = async () => {
+    if (!nombreNuevo.trim()) {
+      alert('El nombre es requerido');
+      return;
+    }
+    await createCategoria({ nombre: nombreNuevo });
+    alert('✅ Categoría Creada');
+    navigate('/categories');
   };
 
   if (loading) return <p>Cargando...</p>;
 
+  // ── Modo creación ──────────────────────────────────────────────
+  if (esNuevo) {
+    return (
+      <div className="category-view">
+        <Header title="Nueva Categoría" showBack />
+        <div className="category-view__content">
+          <div className="category-view__nueva-card">
+            <div className="category-view__nueva-field">
+              <div className="category-view__nueva-label-row">
+                <label>Categoría</label>
+                {nombreNuevo && (
+                  <span
+                    className="category-view__badge"
+                    style={{ backgroundColor: colorSeleccionado.bg, color: colorSeleccionado.color }}
+                  >
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: colorSeleccionado.dot, display: 'inline-block', marginRight: 6 }}></span>
+                    {nombreNuevo}
+                  </span>
+                )}
+              </div>
+              <input
+                placeholder="Ej: Herramientas"
+                value={nombreNuevo}
+                onChange={(e) => setNombreNuevo(e.target.value)}
+                className="category-view__nueva-input"
+              />
+            </div>
+
+            <div className="category-view__nueva-field">
+              <label style={{ fontSize: 15, fontWeight: 600, color: '#333' }}>Color</label>
+              <div className="category-view__colores">
+                {COLORES_DISPONIBLES.map((c) => (
+                  <button
+                    key={c.nombre}
+                    className={`category-view__color-btn ${colorSeleccionado.nombre === c.nombre ? 'category-view__color-btn--active' : ''}`}
+                    style={{ backgroundColor: c.bg, color: c.color, borderColor: colorSeleccionado.nombre === c.nombre ? c.dot : 'transparent' }}
+                    onClick={() => setColorSeleccionado(c)}
+                  >
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: c.dot, display: 'inline-block' }}></span>
+                    {c.nombre}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="category-view__nueva-buttons">
+              <button className="btn btn--secondary" onClick={() => navigate('/categories')}>
+                Cancelar
+              </button>
+              <button className="btn btn--primary" onClick={handleGuardarNueva}>
+                Guardar Categoría
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Modo detalle ───────────────────────────────────────────────
   const color = getColor(categoria.nombre);
 
   return (
     <div className="category-view">
       <Header
-        title={esNuevo ? 'Nueva Categoría' : 'Detalle de Categoría'}
+        title="Detalle de Categoría"
         showBack
         actions={
-          !esNuevo && (
-            <button
-              className="btn btn--danger"
-              onClick={handleEliminarCategoria}
-            >
-              Eliminar Categoría
-            </button>
-          )
+          <button className="btn btn--danger" onClick={handleEliminarCategoria}>
+            Eliminar Categoría
+          </button>
         }
       />
 
       <div className="category-view__content">
-        {/* Badge nombre */}
         <div className="category-view__nombre-row">
           {editandoNombre ? (
             <div className="category-view__edit-nombre">
@@ -121,52 +185,40 @@ function CategoryView() {
           )}
         </div>
 
-        {/* Tabla productos */}
-        {!esNuevo && (
-          <div className="category-view__table">
-            <div className="category-view__thead">
-              <span>Producto</span>
-              <span>Precio</span>
-              <span>Stock</span>
-              <span></span>
-            </div>
-
-            {productos.length === 0 ? (
-              <p className="category-view__empty">No hay productos en esta categoría.</p>
-            ) : (
-              productos.map((p) => (
-                <div key={p.id} className="category-view__row">
-                  <span className="category-view__product-nombre">{p.nombre}</span>
-
-                  <span className="category-view__precio">
-                    ${p.precio.toLocaleString()}
-                  </span>
-
-                  <div className="category-view__stock">
-                    <button onClick={() => handleStock(p, -1)}>−</button>
-                    <span>{p.stock}</span>
-                    <button onClick={() => handleStock(p, 1)}>+</button>
-                  </div>
-
-                  <div className="category-view__actions">
-                    <button
-                      className="category-view__action-btn category-view__action-btn--edit"
-                      onClick={() => navigate(`/products/${p.id}`)}
-                    >
-                      <FiEdit2 size={16} />
-                    </button>
-                    <button
-                      className="category-view__action-btn category-view__action-btn--delete"
-                      onClick={() => handleEliminarProducto(p.id)}
-                    >
-                      <FiTrash2 size={16} />
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
+        <div className="category-view__table">
+          <div className="category-view__thead">
+            <span>Producto</span>
+            <span>Precio</span>
+            <span>Stock</span>
+            <span></span>
           </div>
-        )}
+
+          {productos.length === 0 ? (
+            <p className="category-view__empty">No hay productos en esta categoría.</p>
+          ) : (
+            productos.map((p) => (
+              <div key={p.id} className="category-view__row">
+                <span className="category-view__product-nombre">{p.nombre}</span>
+                <span className="category-view__precio">${p.precio.toLocaleString()}</span>
+                <span className="category-view__stock-number">{p.stock === 0 ? '❌ Sin stock' : `✅ ${p.stock} unidades`} </span>
+                <div className="category-view__actions">
+                  <button
+                    className="category-view__action-btn category-view__action-btn--edit"
+                    onClick={() => navigate(`/products/${p.id}`)}
+                  >
+                    <FiEdit2 size={16} />
+                  </button>
+                  <button
+                    className="category-view__action-btn category-view__action-btn--delete"
+                    onClick={() => handleEliminarProducto(p.id)}
+                  >
+                    <FiTrash2 size={16} />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
