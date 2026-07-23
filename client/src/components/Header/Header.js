@@ -3,7 +3,7 @@ import { FiArrowLeft, FiMenu } from 'react-icons/fi';
 import { openSidebar } from '../../utils/sidebarController';
 import './Header.css';
 
-function Header({ title, actions, showBack }) {
+function Header({ title, actions, showBack, onBack }) {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +13,7 @@ function Header({ title, actions, showBack }) {
           <FiMenu size={20} />
         </button>
         {showBack && (
-          <button className="header__back" onClick={() => navigate(-1)}>
+          <button className="header__back" onClick={onBack || (() => navigate(-1))}>
             <FiArrowLeft size={20} />
           </button>
         )}
