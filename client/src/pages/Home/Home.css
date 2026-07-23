@@ -17,13 +17,18 @@
 }
 
 .home__card {
-  background: white;
+  background: rgba(195, 193, 231, 0.651);
   border-radius: 8px;
   padding: 20px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(10, 13, 223, 0.651);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.home__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(10, 13, 223, 0.651);
 }
 
 .home__card-info {
@@ -57,19 +62,19 @@
 }
 
 .btn--primary {
-  background-color: #333;
+  background-color: #110650;
   color: white;
 }
 
 .btn--primary:hover {
-  background-color: #555;
+  background-color: rgba(15, 4, 80, 0.308);
 }
 
 .btn--secondary {
-  background-color: #f0f0f0;
+  background-color: rgba(212, 151, 247, 0.274);
   color: #333;
 }
 
 .btn--secondary:hover {
-  background-color: #e0e0e0;
+  background-color: rgba(140, 26, 206, 0.24);
 }

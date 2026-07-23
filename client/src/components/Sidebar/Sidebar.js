@@ -53,6 +53,7 @@ function Sidebar({ isOpen, onClose }) {
       </aside>
     </>
   );
+  
 }
 
 export default Sidebar;
