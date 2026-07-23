@@ -34,13 +34,13 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #888;
+  color: #416492;
   display: flex;
   align-items: center;
 }
 
 .category-view__edit-btn:hover {
-  color: #333;
+  color: #03083ad0;
 }
 
 .category-view__edit-nombre {
@@ -58,7 +58,7 @@
 }
 
 .category-view__table {
-  background: white;
+  background: #e6e7ee;
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   overflow: hidden;
@@ -128,11 +128,11 @@
 }
 
 .category-view__action-btn--edit:hover {
-  background-color: #e8f4fd;
+  background-color: #eeeef5;
 }
 
 .category-view__action-btn--delete {
-  color: #cc0000;
+  color: #f35656;
 }
 
 .category-view__action-btn--delete:hover {
@@ -149,7 +149,7 @@
 .category-view__nueva-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(143, 16, 16, 0.08);
   padding: 32px;
   display: flex;
   flex-direction: column;

@@ -27,10 +27,10 @@
 
 .product-view__imagen-wrapper {
   width: 100%;
-  background: white;
+  background: rgb(245, 244, 252);
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(204, 59, 59, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +46,7 @@
 .product-view__nombre-imagen {
   font-size: 15px;
   font-weight: 600;
-  color: #333;
+  color: #15095e;
   text-align: center;
 }
 
@@ -66,7 +66,7 @@
 
 .product-view__url-input input {
   padding: 8px 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #FFFFFF;
   border-radius: 8px;
   font-size: 13px;
   outline: none;
@@ -102,7 +102,7 @@
 .product-view__field label {
   font-size: 13px;
   font-weight: 600;
-  color: #555;
+  color: #1A1625;;
 }
 
 .product-view__field input,

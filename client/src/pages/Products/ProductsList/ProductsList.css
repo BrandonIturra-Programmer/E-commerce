@@ -13,7 +13,7 @@
 
 .products-list__loading,
 .products-list__empty {
-  color: #888;
+  color: #888888;
   font-size: 15px;
   padding: 24px 0;
 }
@@ -22,12 +22,12 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: white;
+  background: #eeeef5;
   border-radius: 10px;
   padding: 14px 20px;
   cursor: pointer;
   transition: box-shadow 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 3px rgba(53, 41, 228, 0.767);
 }
 
 .products-list__item:hover {
@@ -55,7 +55,7 @@
   margin: 0;
   font-size: 15px;
   font-weight: 600;
-  color: #333;
+  color: #292626;
 }
 
 .products-list__item-id {
@@ -79,7 +79,7 @@
 
 .products-list__label {
   font-size: 11px;
-  color: #888;
+  color: #383636;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -87,7 +87,7 @@
 .products-list__badge {
   display: inline-block;
   background-color: #e8f5f4;
-  color: #00897b;
+  color: #004b89;
   font-size: 12px;
   padding: 3px 10px;
   border-radius: 20px;
@@ -113,7 +113,7 @@
   display: flex;
   align-items: center;
   background-color: #f5f5f5;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #9c9898;
   border-radius: 8px;
   padding: 6px 12px;
   gap: 8px;

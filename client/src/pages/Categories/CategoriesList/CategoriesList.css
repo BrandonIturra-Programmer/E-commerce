@@ -10,14 +10,14 @@
 }
 
 .categories-list__loading {
-  color: #888;
+  color: #eed9d9;
   font-size: 15px;
 }
 
 .categories-list__table {
-  background: white;
+  background: #eeeef5;
   border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(90, 18, 18, 0.08);
   overflow: hidden;
   width: 100%;
 }
@@ -26,7 +26,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 14px 24px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid #8aa6ca;
   font-size: 13px;
   font-weight: 700;
   color: #333;
@@ -38,7 +38,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 16px 24px;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #6383ad;
   cursor: pointer;
   transition: background 0.2s;
   align-items: center;
@@ -49,7 +49,7 @@
 }
 
 .categories-list__row:hover {
-  background-color: #fafafa;
+  background-color:  rgba(202, 177, 216, 0.24);;
 }
 
 .categories-list__badge {
@@ -71,5 +71,5 @@
 
 .categories-list__productos {
   font-size: 14px;
-  color: #555;
+  color: #2321a1be;
 }
