@@ -5,8 +5,8 @@ import {
   updateProducto,
   deleteProducto,
   createProducto,
-  getCategorias,
-} from '../../../utils/api';
+} from '../../../utils/productsApi';
+import { getCategorias } from '../../../utils/categoriesApi';
 import Header from '../../../components/Header/Header';
 import './ProductView.css';
 
@@ -55,10 +55,43 @@ function ProductView() {
   };
 
   const handleGuardar = async () => {
+    //Nombre: No puede ser vacio
     if (!producto.nombre) {
-      alert('El nombre es requerido');
+      alert('❌ El nombre es obligatorio');
       return;
     }
+
+    //Descripcion: No puede ser vacia
+    const palabras = producto.descripcion?.trim().split(/\s+/) || [];
+    if (palabras.length <= 5) {
+      alert('❌ Descripcion corta\n❌ Debe contener al menos una palabra');
+      return;
+    }
+
+    //Precio: Debe mayor a 0
+    if (!producto.precio || parseInt(producto.precio) <= 0) {
+      alert('❌ Precio invalido\n❌ Debe ser un número mayor 0');
+      return;
+    }
+
+    //Stock: Debe contener al menos un stock
+    if (esNuevo && parseInt(producto.stock) < 1) {
+      alert('❌ Stock invalido\n❌ Debes ingresar al menos un stock');
+      return;
+    }
+
+    //URL: Debe ser una URL valida
+    if (esNuevo && (!producto.imagen || producto.imagen.trim() === '')) {
+      alert('❌ La imagen es obligatoria');
+      return;
+    }
+
+    //Categoría obligatoria
+    if (!producto.categoria_id || producto.categoria_id === '') {
+      alert('❌ Debes seleccionar una categoría');
+      return;
+    }
+
     const payload = {
       ...producto,
       precio: parseInt(producto.precio) || 0,
@@ -68,7 +101,12 @@ function ProductView() {
     if (esNuevo) {
       const creado = await createProducto(payload);
       alert('✅ Producto Agregado');
-      navigate(`/products/${creado.id}`);
+      if (creado && creado.id) {
+        navigate(`/products/${creado.id}`);
+      }
+      else{
+        navigate('/products');
+      }
     } else {
       const actualizado = await updateProducto(id, payload);
       setProducto(actualizado);
@@ -91,6 +129,7 @@ function ProductView() {
       <Header
         title={esNuevo ? 'Producto Nuevo' : `Producto #${id}`}
         showBack
+        onBack={() => navigate('/products')}
         actions={
           !esNuevo && (
             <button className="btn btn--danger" onClick={handleEliminar}>
@@ -145,7 +184,7 @@ function ProductView() {
 
           <div className="product-view__row">
             <div className="product-view__field">
-              <label>Valor</label>
+              <label>Precio</label>
               <div className="input-prefix">
                 <span>$</span>
                 <input
@@ -196,7 +235,7 @@ function ProductView() {
           <div className="product-view__buttons">
             {esNuevo ? (
               <button className="btn btn--primary" onClick={handleGuardar}>
-                Guardar Cambios
+                Guardar
               </button>
             ) : editando ? (
               <>
@@ -204,7 +243,7 @@ function ProductView() {
                   Cancelar
                 </button>
                 <button className="btn btn--primary" onClick={handleGuardar}>
-                  Guardar
+                  Guardar Cambios
                 </button>
               </>
             ) : (

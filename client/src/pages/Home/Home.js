@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getProductos, getCategorias } from '../../utils/api';
+import { getProductos } from '../../utils/productsApi';
+import { getCategorias } from '../../utils/categoriesApi';
 import Header from '../../components/Header/Header';
 import './Home.css';
 

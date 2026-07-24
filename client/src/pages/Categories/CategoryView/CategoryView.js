@@ -6,7 +6,7 @@ import {
   updateCategoria,
   deleteCategoria,
   createCategoria,
-} from '../../../utils/api';
+} from '../../../utils/categoriesApi';
 import Header from '../../../components/Header/Header';
 import './CategoryView.css';
 
@@ -75,9 +75,20 @@ function CategoryView() {
 
   const handleGuardarNueva = async () => {
     if (!nombreNuevo.trim()) {
-      alert('El nombre es requerido');
+      alert('❌ Nombre de la categoría es obligatorio');
       return;
     }
+
+    if (/\d/.test(nombreNuevo)) {
+      alert('❌ Nombre de categoría invalido\n❌ No puede contener números');
+      return;
+    }
+
+    if (nombreNuevo.trim().length < 3) {
+      alert('❌ Nombre de categoría invalido\n❌ Debe tener al menos 3 caracteres');
+      return;
+    }
+
     await createCategoria({ nombre: nombreNuevo });
     alert('✅ Categoría Creada');
     navigate('/categories');
@@ -135,7 +146,7 @@ function CategoryView() {
                 Cancelar
               </button>
               <button className="btn btn--primary" onClick={handleGuardarNueva}>
-                Guardar Categoría
+                Guardar
               </button>
             </div>
           </div>
